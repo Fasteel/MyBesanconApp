@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">My Besancon</string>
+    <string name="categories">Categories</string>
+    <string name="suggestion_list">Suggestions</string>
+    <string name="suggestion_detail">Detail</string>
     <string name="outdoor_activity">Outdoor activity</string>
     <string name="gastronomy">Gastronomy</string>
     <string name="culture">Culture</string>
+    <string name="back_button">Back</string>
+    <string name="image_of_suggestion">Image of the current suggestion</string>
     <string name="roaming_via_francigena_title">Roaming on the Via Francigena</string>
     <string name="roaming_via_francigena_content">
         Type of stay : Touring holiday\n\n
@@ -16,13 +21,19 @@
 
         Departure: BESANCON - Arrival : BESANCON
     </string>
+    <string name="roaming_via_francigena_description">
+        The Via Francigena itinerary guide - transfer from Jougne to Besançon at the end of the tour by minibus to the starting point - Welcome gift from the Routes du Comté.
+    </string>
     <string name="arcier_aqueduct_title">The Arcier aqueduct - Hiking Visit</string>
     <string name="arcier_aqueduct_content">
         It was in the 1st century, under the reign of the emperor Vespasian, that a 10 km long water conveyance system was built, allowing the waters of Arcier to be transported to the centre of Vesontio.\n\n
 
         In spite of the multiple water resources available around Besançon, the springs of Arcier were chosen because of their altitude and their important flow. The work was ruined in the 5th century and it was not until 1854 that the Arcier springs were once again tapped.\n\n
 
-        They were to provide most of Besançon's water supply for over a century.
+        They were to provide most of Besançon\'s water supply for over a century.
+    </string>
+    <string name="arcier_aqueduct_description">
+        It was in the 1st century, under the reign of the emperor Vespasian, that a 10 km long water conveyance system was built, allowing the waters of Arcier to be transported to the centre of Vesontio.
     </string>
     <string name="bikest_title">Bikest</string>
     <string name="bikest_content">
@@ -30,9 +41,13 @@
 
         Mountain biking, ATV, gravel, road biking, touring and bike-packing, our team of qualified guides and instructors use their expertise and experience to help you discover the most beautiful trails and roads in Greater Besançon and the Jura Mountains.\n\n
 
-        Whatever your level or age, we'll accompany you with a healthy dose of passion and pleasure to give you an unforgettable experience.\n\n
+        Whatever your level or age, we\'ll accompany you with a healthy dose of passion and pleasure to give you an unforgettable experience.\n\n
 
         Discovery hikes, advanced technical and training courses for individuals and groups, organisation of events, seminars and courses.\n
+        The adventure starts here!
+    </string>
+    <string name="bikest_description">
+        Mountain biking, ATV, gravel, road biking, touring and bike-packing, our team of qualified guides and instructors use their expertise and experience to help you discover the most beautiful trails and roads in Greater Besançon and the Jura Mountains.
         The adventure starts here!
     </string>
     <string name="cheese_cellar_title">The Cheese Cellar</string>
@@ -41,7 +56,10 @@
 
         Don\'t forget to accompany them with smoked cured meats, terrines and foie gras with straw wine, as well as chocolates, gingerbread, honeys and jams, before stopping off at the cellar, which houses fine wines, regional beers, brandies and liqueurs…\n\n
 
-        You've reached the treasure cellar!
+        You\'ve reached the treasure cellar!
+    </string>
+    <string name="cheese_cellar_description">
+        At this must-visit gourmet stop in Besançon city centre, you\'ll find the widest choice of Comtés, matured at Marcel Petite and Fort des Rousses for between 6 and 40 months, morbiers, tommes, monts d\'or and cancoillottes.
     </string>
     <string name="unalome_title">L\'Unalôme</string>
     <string name="unalome_content">
@@ -51,6 +69,9 @@
 
         We attach the utmost importance to the quality and provenance of the products we serve.
     </string>
+    <string name="unalome_description">
+        Local in the provenance of the products, universal in its sources of inspiration, Unalôme\'s cuisine is creative, drawing its influences from culinary traditions around the world.
+    </string>
     <string name="piano_pizzeria_title">Piano Pizzeria</string>
     <string name="piano_pizzeria_content">
         The Piano pizzeria welcomes you in a neat and warm place, a cosy atmosphere and a green and design environment. We have chosen natural materials such as Carrara marble and wood. The tableware is handmade and hand-painted by ceramists from the province of Perugia. We mainly make Neapolitan pizzas with an indirect impasto technique to make the dough more digestible. We also offer homemade antipasti and desserts. We carefully select our products directly from Italian and local producers.\n\n
@@ -59,12 +80,18 @@
 
         A piano is present at the entrance, notably for the organisation of concerts programmed every first Saturday of each month.
     </string>
+    <string name="piano_pizzeria_description">
+        The Piano pizzeria welcomes you in a neat and warm place, a cosy atmosphere and a green and design environment. We have chosen natural materials such as Carrara marble and wood. The tableware is handmade and hand-painted by ceramists from the province of Perugia. We mainly make Neapolitan pizzas with an indirect impasto technique to make the dough more digestible. We also offer homemade antipasti and desserts. We carefully select our products directly from Italian and local producers.
+    </string>
     <string name="parc_title">Le parc</string>
     <string name="parc_content">
         Welcome to a universe where time stands still and every moment becomes a celebration. A call to the Dolce Vita, an invitation to fully experience each moment of sharing. “Sharing is Caring”\n\n
 
         Join us for an exclusive experience, immersed in a chic, relaxed and musical atmosphere.\n\n
 
+        Let yourself be carried away by the spirit of Le Parc by Francesco Di Marzio and come and share unforgettable moments with us. Because here, at the heart of our universe, every moment becomes an opportunity to celebrate life.
+    </string>
+    <string name="parc_description">
         Let yourself be carried away by the spirit of Le Parc by Francesco Di Marzio and come and share unforgettable moments with us. Because here, at the heart of our universe, every moment becomes an opportunity to celebrate life.
     </string>
     <string name="citadelle_title">Citadelle de Besançon</string>
@@ -76,6 +103,9 @@
         - the Musée de la Résistance et de la Déportation (Museum of the Resistance and Deportation), which reopened on 8 September 2023 after being closed for more than three years, including 16 months of renovation work.\n
         - the Museum, which illustrates biodiversity and helps to preserve endangered species in its various areas (Zoological Garden, Aquarium, Insectarium, Noctarium and small farm). Nowhere else in France is it possible to see such a diversity of animals in one place.\n
     </string>
+    <string name="citadelle_description">
+        Vauban\'s masterpiece and a UNESCO World Heritage Site, the Besançon Citadel is considered to be one of the most beautiful in France. It towers more than 100 metres above the old town of the Comtois capital, set in a meander of the river, and offers spectacular panoramic views from its ramparts. A major cultural and tourist attraction, the Citadelle delivers on its promise of a living heritage that is full of emotion.
+    </string>
     <string name="resistance_title">Musée de la Résistance et de la Déportation</string>
     <string name="resistance_content">
         The Musée de la Résistance et de la Déportation has been a museum of history since its inception, and it is more essential than ever to continue in this role. However, it aims to renew its approach to strengthen its role as a civic tool.\n\n
@@ -86,6 +116,9 @@
 
         The Fusillés monument commemorates the sacrifice of 98 members of the Resistance who were condemned to death and executed by the German army between 1941 and 1944. It was restored as part of the renovation of the museum.
     </string>
+    <string name="resistance_description">
+        Beyond the history of the Second World War, the museum\'s discourse addresses timeless issues such as the rise to power of a totalitarian regime, the collapse of a democracy, the establishment of a system of large-scale repression and extermination, as well as the Resistance and commitment in the name of values that transcend individuals.
+    </string>
     <string name="temps_title">Musée du Temps</string>
     <string name="temps_content">
         The Musée du Temps in Besançon: a museum in a palace\n\n
@@ -94,8 +127,11 @@
 
         The evocation of Besançon as a "watchmaking capital" is reflected in the museum through the city\'s heritage collections. In addition to the famous Leroy 01, long considered the most complicated watch in the world, the museum presents some of the instruments of the Besançon Astronomical Observatory, which certified the correct operation of the chronometers, as well as the educational material of the National Watchmaking School. In addition, the watchmaking collections offer an overview of the history of the discipline, with Ferdinand Berthoud and Antide Janvier representing some of the greatest names in watchmaking history.\n\n
 
-        At the same time, tapestries, famous people, relief drawings, historical paintings, furniture and objets d'art invite us to delve into the history of the place, the town and even the Franche-Comté region.\n\n
+        At the same time, tapestries, famous people, relief drawings, historical paintings, furniture and objets d\'art invite us to delve into the history of the place, the town and even the Franche-Comté region.\n\n
 
-        To finish, a panorama of the city's roofs is offered to visitors after contemplating Foucault's famous pendulum, located at the foot of the palace tower, which gives rhythm to the Earth's rotation.
+        To finish, a panorama of the city\'s roofs is offered to visitors after contemplating Foucault\'s famous pendulum, located at the foot of the palace tower, which gives rhythm to the Earth\'s rotation.
+    </string>
+    <string name="temps_description">
+        Located in the heart of a prestigious Renaissance palace, the Granvelle Palace, the Time Museum retraces the great moments of watchmaking in Besançon, bringing together the history of time measurement and the history of the city.
     </string>
 </resources>

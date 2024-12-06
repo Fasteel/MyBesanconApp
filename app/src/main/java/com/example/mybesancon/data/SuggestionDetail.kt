@@ -8,5 +8,6 @@ data class SuggestionDetail(
     val category: SuggestionCategory,
     @StringRes val title: Int,
     @StringRes val content: Int,
+    @StringRes val description: Int,
     @DrawableRes val mainPicture: Int,
 )
