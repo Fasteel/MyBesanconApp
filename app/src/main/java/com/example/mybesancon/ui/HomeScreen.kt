@@ -37,60 +37,57 @@ fun HomeScreen(
     navController: NavHostController = rememberNavController(),
     suggestionCategories: List<SuggestionCategory>
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            val carouselState =
-                rememberCarouselState { suggestionCategories.count() }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        val carouselState =
+            rememberCarouselState { suggestionCategories.count() }
 
-            HorizontalMultiBrowseCarousel(
-                state = carouselState,
-                itemSpacing = dimensionResource(R.dimen.medium),
-                contentPadding = PaddingValues(start = dimensionResource(R.dimen.medium)),
-                preferredItemWidth = 250.dp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(
-                        top = dimensionResource(R.dimen.small),
-                        bottom = dimensionResource(R.dimen.small)
-                    )
-            ) { index ->
-                val value = suggestionCategories[index]
+        HorizontalMultiBrowseCarousel(
+            state = carouselState,
+            itemSpacing = dimensionResource(R.dimen.medium),
+            contentPadding = PaddingValues(start = dimensionResource(R.dimen.medium)),
+            preferredItemWidth = 250.dp,
+            modifier = Modifier
+                .wrapContentHeight()
+                .padding(
+                    top = dimensionResource(R.dimen.small),
+                    bottom = dimensionResource(R.dimen.small)
+                )
+        ) { index ->
+            val value = suggestionCategories[index]
 
-                Column(modifier = Modifier.clickable {
-                    navController.navigate(
-                        "${MyBesanconScreen.List.name}/${value.id}"
+            Column(modifier = Modifier.clickable {
+                navController.navigate(
+                    "${MyBesanconScreen.List.name}/${value.id}"
+                )
+            }) {
+                Box(contentAlignment = Alignment.BottomCenter) {
+                    Image(
+                        painter = painterResource(id = value.mainPicture),
+                        contentDescription = stringResource(value.title),
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .height(350.dp)
+                            .fillMaxWidth()
+                            .maskClip(shape = MaterialTheme.shapes.extraLarge)
                     )
-                }) {
-                    Box(contentAlignment = Alignment.BottomCenter) {
-                        Image(
-                            painter = painterResource(id = value.mainPicture),
-                            contentDescription = stringResource(value.title),
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .height(350.dp)
-                                .fillMaxWidth()
-                                .maskClip(shape = MaterialTheme.shapes.extraLarge)
-                        )
-                        Card(
-                            modifier = Modifier.padding(bottom = 25.dp),
-                            colors = CardDefaults.cardColors()
-                                .copy(
-                                    containerColor = CardDefaults.cardColors().containerColor.copy(
-                                        alpha = 0.7f
-                                    )
+                    Card(
+                        modifier = Modifier.padding(bottom = 25.dp),
+                        colors = CardDefaults.cardColors()
+                            .copy(
+                                containerColor = CardDefaults.cardColors().containerColor.copy(
+                                    alpha = 0.7f
                                 )
-                        ) {
-                            Text(
-                                modifier = Modifier.padding(dimensionResource(R.dimen.small)),
-                                text = stringResource(value.title),
-                                textAlign = TextAlign.Center,
-                                style = MaterialTheme.typography.labelLarge,
                             )
-                        }
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(dimensionResource(R.dimen.small)),
+                            text = stringResource(value.title),
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.labelLarge,
+                        )
                     }
                 }
             }
