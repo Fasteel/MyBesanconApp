@@ -21,7 +21,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mybesancon.R
-import com.example.mybesancon.data.local.LocalSuggestionDetailDataProvider
+import com.example.mybesancon.data.SuggestionDetail
+import com.example.mybesancon.data.local.LocalSuggestionCategoryDataProvider
 import com.example.mybesancon.ui.theme.AppTheme
 
 @Composable
@@ -56,8 +57,8 @@ fun SuggestionItem(
                     style = MaterialTheme.typography.titleMedium,
                 )
                 Text(
-                    text = stringResource(description).substring(0, 99) + "...",
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(description).substring(0, 130) + "...",
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
@@ -68,7 +69,15 @@ fun SuggestionItem(
 @Composable
 fun SuggestionItemPreview() {
     AppTheme {
-        val item = LocalSuggestionDetailDataProvider.data[0]
+        val item = SuggestionDetail(
+            id = 1,
+            title = R.string.roaming_via_francigena_title,
+            content = R.string.roaming_via_francigena_content,
+            category = LocalSuggestionCategoryDataProvider.data[0],
+            description = R.string.roaming_via_francigena_description,
+            mainPicture = R.drawable.viafrancigena
+        )
+
         SuggestionItem(
             title = item.title,
             mainPicture = item.mainPicture,

@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
@@ -17,11 +18,14 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mybesancon.R
 import com.example.mybesancon.data.local.LocalSuggestionCategoryDataProvider
-import com.example.mybesancon.data.local.LocalSuggestionDetailDataProvider
+import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyBesanconTopBar(navController: NavHostController = rememberNavController()) {
+fun MyBesanconTopBar(
+    navController: NavHostController = rememberNavController(),
+    uiState: StateFlow<SuggestionUiState>
+) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = MyBesanconScreen.valueOf(
         navBackStackEntry?.destination?.route?.split("/")?.get(0)
@@ -42,26 +46,22 @@ fun MyBesanconTopBar(navController: NavHostController = rememberNavController())
                         val currentCategoryId =
                             navBackStackEntry?.arguments?.getString("categoryId")!!.toInt()
                         val category =
-                            LocalSuggestionCategoryDataProvider.data.find { it.id == currentCategoryId }
-                        category?.let {
-                            Text(
-                                text = stringResource(it.title),
-                                style = MaterialTheme.typography.titleSmall
-                            )
-                        }
+                            LocalSuggestionCategoryDataProvider.data.first { it.id == currentCategoryId }
+                        Text(
+                            text = stringResource(category.title),
+                            style = MaterialTheme.typography.titleSmall
+                        )
                     }
 
                     MyBesanconScreen.Detail -> {
                         val suggestionId =
                             navBackStackEntry?.arguments?.getString("suggestionId")!!.toInt()
-                        val suggestion =
-                            LocalSuggestionDetailDataProvider.data.find { it.id == suggestionId }
-                        suggestion?.let {
-                            Text(
-                                text = stringResource(it.title),
-                                style = MaterialTheme.typography.titleSmall
-                            )
-                        }
+                        val suggestionDetail =
+                            uiState.collectAsState().value.suggestionDetail.first { it.id == suggestionId }
+                        Text(
+                            text = stringResource(suggestionDetail.title),
+                            style = MaterialTheme.typography.titleSmall
+                        )
                     }
 
                     else -> {

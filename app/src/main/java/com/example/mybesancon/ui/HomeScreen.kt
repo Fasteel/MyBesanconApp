@@ -18,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,21 +29,21 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.mybesancon.R
-import com.example.mybesancon.data.local.LocalSuggestionCategoryDataProvider
+import com.example.mybesancon.data.SuggestionCategory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
+    suggestionCategories: List<SuggestionCategory>
 ) {
-    val categories = rememberSaveable { LocalSuggestionCategoryDataProvider.data }
-
     Column(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val carouselState = rememberCarouselState { categories.count() }
+            val carouselState =
+                rememberCarouselState { suggestionCategories.count() }
 
             HorizontalMultiBrowseCarousel(
                 state = carouselState,
@@ -59,7 +58,7 @@ fun HomeScreen(
                         bottom = dimensionResource(R.dimen.small)
                     )
             ) { index ->
-                val value = categories[index]
+                val value = suggestionCategories[index]
 
                 Column(modifier = Modifier.clickable {
                     navController.navigate(
