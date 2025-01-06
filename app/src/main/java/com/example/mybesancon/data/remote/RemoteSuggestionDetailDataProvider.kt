@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
 object RemoteSuggestionDetailDataProvider {
 
     suspend fun fetch(): List<SuggestionDetail> {
-        delay(3000L) // simulate network call delay
+        delay(30000L) // simulate network call delay
         return listOf(
             SuggestionDetail(
                 id = 1,
