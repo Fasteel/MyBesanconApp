@@ -4,15 +4,24 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -31,6 +40,8 @@ fun SuggestionItem(
     @DrawableRes mainPicture: Int,
     @StringRes description: Int,
     onClickItem: () -> Unit,
+    onSaveFavorite: (() -> Unit)? = null,
+    isFavorite: Boolean,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -51,15 +62,41 @@ fun SuggestionItem(
                     .padding(dimensionResource(R.dimen.small))
                     .weight(2f)
             ) {
-                Text(
-                    text = stringResource(title),
-                    modifier = modifier.padding(bottom = dimensionResource(R.dimen.small)),
-                    style = MaterialTheme.typography.titleMedium,
-                )
-                Text(
-                    text = stringResource(description).substring(0, 130) + "...",
-                    style = MaterialTheme.typography.bodySmall,
-                )
+                Column(modifier = modifier.heightIn(0.dp, 100.dp)) {
+                    Text(
+                        text = stringResource(title),
+                        modifier = modifier.padding(bottom = dimensionResource(R.dimen.small)),
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    Text(
+                        text = stringResource(description).substring(0, 130) + "...",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
+                if (onSaveFavorite != null) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .width(50.dp)
+                                .height(50.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                tint = MaterialTheme.colorScheme.surfaceTint,
+                                imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                                contentDescription = stringResource(R.string.favorite_icon),
+                                modifier = Modifier.clickable {
+                                    onSaveFavorite.invoke()
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -82,7 +119,8 @@ fun SuggestionItemPreview() {
             title = item.title,
             mainPicture = item.mainPicture,
             description = item.description,
-            onClickItem = {}
+            isFavorite = false,
+            onClickItem = {},
         )
     }
 }

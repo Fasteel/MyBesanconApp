@@ -7,6 +7,7 @@ import com.example.mybesancon.data.local.LocalSuggestionCategoryDataProvider
 import com.example.mybesancon.data.remote.RemoteSuggestionDetailDataProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class SuggestionUiState(
@@ -22,9 +23,19 @@ class SuggestionViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _uiState.value =
-                SuggestionUiState(suggestionDetail = RemoteSuggestionDetailDataProvider.fetch())
+            _uiState.update { currentState ->
+                currentState.copy(suggestionDetail = RemoteSuggestionDetailDataProvider.fetch())
+            }
         }
     }
 
+    fun toggleFavorite(suggestion: SuggestionDetail) {
+        viewModelScope.launch {
+            _uiState.update { currentState ->
+                currentState.copy(suggestionDetail = currentState.suggestionDetail.map {
+                    if (it.id == suggestion.id) it.copy(isFavorite = !it.isFavorite) else it
+                })
+            }
+        }
+    }
 }

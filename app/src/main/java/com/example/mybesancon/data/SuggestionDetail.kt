@@ -10,4 +10,5 @@ data class SuggestionDetail(
     @StringRes val content: Int,
     @StringRes val description: Int,
     @DrawableRes val mainPicture: Int,
+    val isFavorite: Boolean = false,
 )

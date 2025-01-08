@@ -28,14 +28,18 @@ fun MyBesanconApp(navController: NavHostController = rememberNavController()) {
             composable(route = MyBesanconScreen.Home.name) {
                 HomeScreen(
                     navController = navController,
-                    suggestionCategories = viewModel.categories
+                    suggestionCategories = viewModel.categories,
+                    uiState = viewModel.uiState,
                 )
             }
             composable(route = "${MyBesanconScreen.List.name}/{categoryId}") { navBackStackEntry ->
                 SuggestionListScreen(
                     navController = navController,
                     navBackStackEntry = navBackStackEntry,
-                    uiState = viewModel.uiState
+                    uiState = viewModel.uiState,
+                    onSaveFavorite = { suggestion ->
+                        viewModel.toggleFavorite(suggestion)
+                    }
                 )
             }
             composable(route = "${MyBesanconScreen.Detail.name}/{suggestionId}") { navBackStackEntry ->
