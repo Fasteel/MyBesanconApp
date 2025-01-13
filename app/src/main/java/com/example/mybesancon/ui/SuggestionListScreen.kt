@@ -64,6 +64,7 @@ fun SuggestionListScreen(
 
     val canShowSideSuggestionDetail =
         currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT
+    val favoriteSuggestions = uiState.collectAsState().value.favoriteSuggestions
 
     if (canShowSideSuggestionDetail) {
         val selectedSuggestionId =
@@ -92,7 +93,7 @@ fun SuggestionListScreen(
                                 scrollState.scrollTo(0)
                             }
                         },
-                        isFavorite = it.isFavorite,
+                        isFavorite = favoriteSuggestions.contains(it),
                         onSaveFavorite = { onSaveFavorite(it) }
                     )
                 }
@@ -123,7 +124,7 @@ fun SuggestionListScreen(
                     title = it.title,
                     mainPicture = it.mainPicture,
                     description = it.description,
-                    isFavorite = it.isFavorite,
+                    isFavorite = favoriteSuggestions.contains(it),
                     onClickItem = { navController.navigate("${MyBesanconScreen.Detail.name}/${it.id}") },
                     onSaveFavorite = { onSaveFavorite(it) }
                 )

@@ -43,7 +43,7 @@ fun HomeScreen(
     uiState: StateFlow<SuggestionUiState>
 ) {
     val favoriteSuggestions =
-        uiState.collectAsState().value.suggestionDetail.filter { it.isFavorite }
+        uiState.collectAsState().value.favoriteSuggestions
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         val carouselState =
@@ -116,7 +116,7 @@ fun HomeScreen(
                         title = favoriteSuggestion.title,
                         mainPicture = favoriteSuggestion.mainPicture,
                         description = favoriteSuggestion.description,
-                        isFavorite = favoriteSuggestion.isFavorite,
+                        isFavorite = true,
                         onClickItem = { navController.navigate("${MyBesanconScreen.Detail.name}/${favoriteSuggestion.id}") },
                     )
                 }

@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 
 data class SuggestionUiState(
     val suggestionDetail: List<SuggestionDetail> = emptyList(),
+    val favoriteSuggestions: List<SuggestionDetail> = emptyList()
 )
 
 class SuggestionViewModel : ViewModel() {
@@ -32,9 +33,15 @@ class SuggestionViewModel : ViewModel() {
     fun toggleFavorite(suggestion: SuggestionDetail) {
         viewModelScope.launch {
             _uiState.update { currentState ->
-                currentState.copy(suggestionDetail = currentState.suggestionDetail.map {
-                    if (it.id == suggestion.id) it.copy(isFavorite = !it.isFavorite) else it
-                })
+                if (currentState.favoriteSuggestions.contains(suggestion)) {
+                    currentState.copy(
+                        favoriteSuggestions = currentState.favoriteSuggestions.filter { it.id != suggestion.id }
+                    )
+                } else {
+                    currentState.copy(
+                        favoriteSuggestions = currentState.favoriteSuggestions + suggestion
+                    )
+                }
             }
         }
     }
