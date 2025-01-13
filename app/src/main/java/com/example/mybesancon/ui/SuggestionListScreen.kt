@@ -26,6 +26,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import com.example.mybesancon.R
+import com.example.mybesancon.data.SuggestionDetail
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
@@ -34,7 +35,8 @@ import kotlin.math.absoluteValue
 fun SuggestionListScreen(
     navBackStackEntry: NavBackStackEntry,
     navController: NavHostController = rememberNavController(),
-    uiState: StateFlow<SuggestionUiState>
+    uiState: StateFlow<SuggestionUiState>,
+    onSaveFavorite: (suggestion: SuggestionDetail) -> Unit
 ) {
     if (navBackStackEntry.arguments?.getString("categoryId") == null) {
         throw Exception("You should give the category for the SuggestionList Screen")
@@ -62,6 +64,7 @@ fun SuggestionListScreen(
 
     val canShowSideSuggestionDetail =
         currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass != WindowWidthSizeClass.COMPACT
+    val favoriteSuggestions = uiState.collectAsState().value.favoriteSuggestions
 
     if (canShowSideSuggestionDetail) {
         val selectedSuggestionId =
@@ -89,7 +92,9 @@ fun SuggestionListScreen(
                             coroutineScope.launch {
                                 scrollState.scrollTo(0)
                             }
-                        }
+                        },
+                        isFavorite = favoriteSuggestions.contains(it),
+                        onSaveFavorite = { onSaveFavorite(it) }
                     )
                 }
             }
@@ -119,11 +124,12 @@ fun SuggestionListScreen(
                     title = it.title,
                     mainPicture = it.mainPicture,
                     description = it.description,
-                    onClickItem = { navController.navigate("${MyBesanconScreen.Detail.name}/${it.id}") }
+                    isFavorite = favoriteSuggestions.contains(it),
+                    onClickItem = { navController.navigate("${MyBesanconScreen.Detail.name}/${it.id}") },
+                    onSaveFavorite = { onSaveFavorite(it) }
                 )
             }
         }
-
     }
 }
 

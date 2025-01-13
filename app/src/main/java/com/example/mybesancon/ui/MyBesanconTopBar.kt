@@ -1,6 +1,7 @@
 package com.example.mybesancon.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -23,6 +25,7 @@ import kotlinx.coroutines.flow.StateFlow
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyBesanconTopBar(
+    modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     uiState: StateFlow<SuggestionUiState>
 ) {
@@ -65,10 +68,7 @@ fun MyBesanconTopBar(
                     }
 
                     else -> {
-                        Text(
-                            text = stringResource(R.string.categories),
-                            style = MaterialTheme.typography.titleSmall
-                        )
+                        Spacer(modifier = modifier)
                     }
                 }
             }

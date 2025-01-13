@@ -2,14 +2,16 @@ package com.example.mybesancon.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
 import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -30,17 +33,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.mybesancon.R
 import com.example.mybesancon.data.SuggestionCategory
+import kotlinx.coroutines.flow.StateFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavHostController = rememberNavController(),
-    suggestionCategories: List<SuggestionCategory>
+    suggestionCategories: List<SuggestionCategory>,
+    uiState: StateFlow<SuggestionUiState>
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
+    val favoriteSuggestions =
+        uiState.collectAsState().value.favoriteSuggestions
+
+    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         val carouselState =
             rememberCarouselState { suggestionCategories.count() }
 
@@ -89,6 +94,31 @@ fun HomeScreen(
                             style = MaterialTheme.typography.labelLarge,
                         )
                     }
+                }
+            }
+        }
+        if (favoriteSuggestions.isNotEmpty()) {
+            Text(
+                text = stringResource(R.string.favorite),
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(R.dimen.medium)),
+                textAlign = TextAlign.Left
+            )
+            Column(
+                verticalArrangement = Arrangement.spacedBy(space = 12.dp),
+                modifier = Modifier
+                    .padding(dimensionResource(R.dimen.medium))
+            ) {
+                for (favoriteSuggestion in favoriteSuggestions) {
+                    SuggestionItem(
+                        title = favoriteSuggestion.title,
+                        mainPicture = favoriteSuggestion.mainPicture,
+                        description = favoriteSuggestion.description,
+                        isFavorite = true,
+                        onClickItem = { navController.navigate("${MyBesanconScreen.Detail.name}/${favoriteSuggestion.id}") },
+                    )
                 }
             }
         }

@@ -7,10 +7,12 @@ import com.example.mybesancon.data.local.LocalSuggestionCategoryDataProvider
 import com.example.mybesancon.data.remote.RemoteSuggestionDetailDataProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class SuggestionUiState(
     val suggestionDetail: List<SuggestionDetail> = emptyList(),
+    val favoriteSuggestions: List<SuggestionDetail> = emptyList()
 )
 
 class SuggestionViewModel : ViewModel() {
@@ -22,9 +24,25 @@ class SuggestionViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _uiState.value =
-                SuggestionUiState(suggestionDetail = RemoteSuggestionDetailDataProvider.fetch())
+            _uiState.update { currentState ->
+                currentState.copy(suggestionDetail = RemoteSuggestionDetailDataProvider.fetch())
+            }
         }
     }
 
+    fun toggleFavorite(suggestion: SuggestionDetail) {
+        viewModelScope.launch {
+            _uiState.update { currentState ->
+                if (currentState.favoriteSuggestions.contains(suggestion)) {
+                    currentState.copy(
+                        favoriteSuggestions = currentState.favoriteSuggestions.filter { it.id != suggestion.id }
+                    )
+                } else {
+                    currentState.copy(
+                        favoriteSuggestions = currentState.favoriteSuggestions + suggestion
+                    )
+                }
+            }
+        }
+    }
 }

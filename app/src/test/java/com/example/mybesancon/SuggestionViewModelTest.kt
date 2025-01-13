@@ -116,6 +116,32 @@ class SuggestionViewModelTest {
         Assertions.assertEquals(suggestionDetail, expectedResult)
     }
 
+    @Test
+    fun viewModelUpdate_shouldAddOneElementToFavoriteListAndRemoveIt() = runTest {
+        advanceUntilIdle()
+        Assertions.assertEquals(
+            emptyList<SuggestionDetail>(),
+            viewModel.uiState.value.favoriteSuggestions
+        )
+        val newFavorite = SuggestionDetail(
+            id = 1,
+            title = R.string.roaming_via_francigena_title,
+            content = R.string.roaming_via_francigena_content,
+            category = LocalSuggestionCategoryDataProvider.data[0],
+            description = R.string.roaming_via_francigena_description,
+            mainPicture = R.drawable.viafrancigena
+        )
+        viewModel.toggleFavorite(newFavorite)
+        advanceUntilIdle()
+        Assertions.assertEquals(listOf(newFavorite), viewModel.uiState.value.favoriteSuggestions)
+        viewModel.toggleFavorite(newFavorite)
+        advanceUntilIdle()
+        Assertions.assertEquals(
+            emptyList<SuggestionDetail>(),
+            viewModel.uiState.value.favoriteSuggestions
+        )
+    }
+
     companion object {
         @JvmStatic
         @BeforeAll
